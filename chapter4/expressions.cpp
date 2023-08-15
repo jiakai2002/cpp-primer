@@ -81,14 +81,110 @@ void assign_grade(int i) {
 
 //if left associative then whether condition true/false, it will evaluate left operand
 
+//ex section 4.8
+
+//(~'q') << 6 
+//(24 0s)10001110 << 6
+//(18 0s)10001110 000000 
+//may have not enough (less than 32) bits on some machines
+//ul1 = 3; 11
+//ul2 = 7; 111
+//a) 3
+//b) 7
+//c)true
+//d)true
+
+void find_size_arr() {
+	int arr[] = {1,2,3,4,5};
+	constexpr size_t sz = sizeof(arr)/sizeof(*arr);
+	cout << sz << endl;
+	cout << arr[sz - 1] << endl;
+}
+
+//ex section 4.9
+
+void builtin_size() {
+	cout << "short " << sizeof(short) << "\n";
+	cout << "int " << sizeof(int) << "\n";
+	cout << "long " << sizeof(long) << "\n";
+	cout << "float " << sizeof(float) << "\n";
+	cout << "double " << sizeof(double) << "\n";
+	cout << "long double " << sizeof(long double) << "\n";
+	cout << "bool " << sizeof(bool) << "\n";
+	cout << "char " << sizeof(char) << "\n";
+	cout <<"wchar_t " << sizeof(wchar_t) << "\n";
+	cout <<"char16_t " << sizeof(char16_t) << "\n";
+	cout <<"char32_t " << sizeof(char32_t) << "\n";
+}
+
+//10
+//size required to hold address/size of arr x
+
+void test() {
+	int x[10];   int *p = x;
+	cout << sizeof(x)/sizeof(*x) << endl;//length of array = 10
+	cout << sizeof(p)/sizeof(*p)<< endl;//size of pointer / size of first element in x
+}
+
+//(sizeof(x))+y
+//sizeof((p->mem)[i])
+//(sizeof(x)) < b
+//sizeof(f())
+
+//ex section 4.10
+//no diff in for loop, postfix less efficient since need to hold old value;
+//iterates through ia array using pointer and int
+//if true inc xy else dec xy
+
+//ex section 4.11
+//float to bool
+//int to float then float to double
+//char to int, then int to double
+//a)char to int, then int to char
+//b)int to unsigned int, then to float
+//c)unsigned int to float then to double
+//d)int to float, then float to double, then double to char
 
 
+//**avoid casts
+void test_cast() {
+	//static cast if confident no data loss
+	int i=1,j=2;
+	double d = static_cast<double> (i)/j;
+	cout<<d<<endl;
+	//cast away high level const
+	//only useful for overloaded functions
+	const int ci = 3;
+	const int *p = &ci;
+	int *p1 = const_cast<int*>(p);
+	cout<<*p1<<endl;
+	//reinterpret cast can be dangerous
+}
 
+void decl_in_loop() {
+	for (int i=0;i<5;++i) {
+		int sum=0;
+
+	}
+}
+
+//ex section 4.11.3
+void int_mul() {
+	int i = 2; 
+	double d = 1.5;
+	i *= static_cast<int>(d);
+	cout << i << endl;
+}
+
+void old_styles() {
+	int i; double d; const string *ps; char *pc; void *pv;
+	pv = const_cast<string*>(ps);
+	i = static_cast<int>(*pc);
+	pv = static_cast<double*>(&d);
+	pc = static_cast<char*>(pv);
+}
+//do integral division then convert to double
 
 int main() {
-	int i = 63;
-	assign_grade(i);
-	string s = "word";
-	string pl = ((s + s[s.size() - 1]) == ’s’ ? "" : "s") ;
-
+	old_styles();
 }
