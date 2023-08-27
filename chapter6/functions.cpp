@@ -1,0 +1,77 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void swap_pointer(int *p1, int *p2) {
+	int temp = *p1;
+	*p1 = *p2;
+	*p2 = temp;
+	cout << *p1 << *p2 << endl;
+}
+
+//ex sec 6.23
+//use const string &s
+//check_caps use const string &s
+//lower use string &s since writing the string
+//a)illegal, one arg allowed
+//b)illegal, identifier for const string& missing
+//c)illegal, double type arg
+//d)illegal, int arg
+//other correct functions that use const ref cannot use pass arg to it
+//cannot enter string literals as arg
+
+// ex6.39
+//a)legal, low-level const args are unique from non-const arg
+//b)illegal, no match 
+//c)legal, para are different
+
+//dont nest functions as it hides previous definitions in the outer scope
+
+//ex 6.49
+//candidate function -> same name
+//viable -> convertible args
+//candidate->viable->find best match
+
+//ex 6.50
+//void f();
+//void f(int);
+//void f(int, int);
+//void f(double, double = 3.14);
+//a)ambiguous 
+//b)best match
+//c)best match
+//d)best match
+
+//ex 6.52
+//a)3
+//b)3
+
+//ex 6.53
+//a,b,c)legal
+
+//ex 6.54
+int add(int a, int b) {
+	return a+b;
+}
+
+int subtract(int a, int b) {
+	return a-b;
+}
+
+int funct(int a, int b) {
+	using F = int(*)(int, int);
+	vector<F> v;
+	v.push_back(add);
+	v.push_back(subtract);
+	for (auto f : v)
+		cout << f << endl;
+	return 1;
+}
+
+
+
+int main() {
+	funct(1,2);
+	return 1;
+}
